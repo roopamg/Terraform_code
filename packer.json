@@ -1,0 +1,30 @@
+{
+     "builders": [{
+       "type": "amazon-ebs",
+       "region": "us-east-2",
+       "source_ami": "ami-00399ec92321828f5",
+       "instance_type": "t2.micro",
+       "force_deregister": "true",
+       "force_delete_snapshot": "true",
+       "ssh_username": "ubuntu",
+       "ami_name": "packer_test_ami"
+               }],
+     "provisioners": [
+	     {
+       "type": "shell",
+       "inline": [
+	       "sudo add-apt-repository --yes --update ppa:ansible/ansible -y",
+	       "sudo apt update -y",
+	       "sudo apt-get install ansible -y"
+                 ]
+	     },
+		 { 
+       "type": "shell",
+       "script": "setup.sh"
+		 },
+       {
+       "type": "ansible-local",
+       "playbook_file": "./ansible/server.yml"
+       }
+     ]
+}

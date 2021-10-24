@@ -1,0 +1,27 @@
+---
+- name: Install Nginx, PHP and set folder permissions
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install apach2
+      apt:
+        name: apache2
+        state: present
+
+    - name: start apache2 service
+      service:
+        name: apache2
+        state: restarted
+
+    - name: Download source code
+      get_url: 
+        url: https://freewebsitetemplates.com/website/jamesconsulting/
+        dest: /tmp
+
+    - name: Copy the file in /var/www/html folder
+      copy:
+        src: /tmp/
+        dest: /var/www/html
+
+
+
