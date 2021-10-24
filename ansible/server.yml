@@ -1,5 +1,5 @@
 ---
-- name: Install Nginx, PHP and set folder permissions
+- name: Install apache2 server 
   hosts: all
   become: yes
   tasks:

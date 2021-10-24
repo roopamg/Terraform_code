@@ -6,8 +6,8 @@
        "instance_type": "t2.micro",
        "force_deregister": "true",
        "force_delete_snapshot": "true",
-       "ssh_username": "ubuntu",
-       "ami_name": "packer_test_ami"
+       "ssh_username": "{{ user `username` }}",
+       "ami_name": "{{ user `ami_name` }}"
                }],
      "provisioners": [
 	     {
@@ -24,7 +24,7 @@
 		 },
        {
        "type": "ansible-local",
-       "playbook_file": "./ansible/server.yml"
+       "playbook_file": "/root/Terraform_code/ansible/server.yml"
        }
      ]
 }
